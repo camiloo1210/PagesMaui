@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PagesMaui.Views"
     Title="PagesMaui">
+    <!---
     <FlyoutItem Title="Page1" Icon="dotnet_bot.png">
         <ShellContent
      Title="Home"
@@ -25,5 +26,18 @@
      ContentTemplate="{DataTemplate local:Page3}"
      Route="Page3" />
     </FlyoutItem>
+    -->
+    <TabBar>
+        <Tab Title="Page1" Icon="dotnet_bot.png">
+            <ShellContent  Title="Home"
+                ContentTemplate="{DataTemplate local:Page1}"
+                Route="Page1" />
+        </Tab>
+        <Tab Title="Page2" Icon="dotnet_bot.png">
+            <ShellContent  Title="Home"
+                ContentTemplate="{DataTemplate local:Page2}"
+                Route="Page2" />
+        </Tab>
+    </TabBar>
 
 </Shell>
