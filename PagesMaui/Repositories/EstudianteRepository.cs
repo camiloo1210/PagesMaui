@@ -1,15 +1,20 @@
-﻿using PagesMaui.Interfaces;
+﻿using Newtonsoft.Json;
+using PagesMaui.Interfaces;
 using PagesMaui.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace PagesMaui.Repositories
 {
     public class EstudianteRepository : IEstudianteRepository
     {
+        public HttpClient _httpClient;
+        public string endpoint = "https://freetestapi.com/api/v1/students/1"; 
         public bool ActualizarEstudiante(Estudiante estudiante)
         {
             throw new NotImplementedException();
@@ -23,11 +28,15 @@ namespace PagesMaui.Repositories
         public List<Estudiante> DevuelveListadoEstudiante()
         {
            List<Estudiante> estudiantes= new List<Estudiante>();
-            estudiantes.Add(GetEstudiante(1));
-            estudiantes.Add(GetEstudiante(2));
-            estudiantes.Add(GetEstudiante(3));
-            return estudiantes;
-           
+            using (_httpClient)
+            {
+                var response = _httpClient.GetAsync(endpoint).Result;
+                string json_data=response.Content.ReadAsStringAsync().Result;  
+                 List<Estudiante> estudianteAPI= new List<Estudiante>;
+                 estudianteAPI = JsonConverter.DeserializeObject<List<Estudiante>>(json_data);
+                estu
+            }
+
         }
 
         public bool EliminarEstudiante(int id)
@@ -39,9 +48,9 @@ namespace PagesMaui.Repositories
         {
             return new Estudiante
             {
-                Id = id,
-                Name = "Camily",
-                Degree = "Ing Software"
+                id = id,
+                name = "Camily",
+                age = 9,
             };
         }
     }
